@@ -76,6 +76,10 @@
         transition: top 0.5s ease-out;
         background-color: $white-main;
 
+        @media (max-width: $breakpoint-xl) {
+          top: -200vh;
+        }
+
         @media screen and (max-width: $breakpoint-md) {
           display: none;
         }
