@@ -1,0 +1,56 @@
+.wrapper {
+    list-style-type: none;
+}
+
+.link {
+    display: flex;
+    gap: 20px;
+    padding: $sp-3x;
+    text-decoration: none;
+    color: $black-main;
+    
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column;
+    }
+}
+
+.link:hover {
+    color: black;
+    background-color: $blue-200;
+    border-radius: $sp-6x;
+}
+
+.img {
+    border-radius: $rad-3x;
+    min-width: 320px;
+    height: 200px;
+    object-fit: cover;
+
+    @media (max-width: $breakpoint-lg) {
+        min-width: auto;
+        width: 200px;
+        height: auto;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        width: 100%;
+    }
+}
+
+.title {
+    margin-bottom: $sp-2x * 1.5;
+}
+
+.date {
+    color: $black-400;
+
+    @media (max-width: $breakpoint-md) {
+        text-align: end;
+    }
+}
+
+.text {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}

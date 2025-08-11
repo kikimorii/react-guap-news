@@ -4,7 +4,6 @@ export default async (url, setPageItems, setPagePagination) => {
     .then((loadedData) => {
       setPageItems(loadedData.items);
       setPagePagination(loadedData.pagintaion);
-      console.log(loadedData);
     })
     .catch((error) => console.log(error));
 }

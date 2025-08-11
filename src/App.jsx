@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import loadingPageContent from "./utils/loadingPageContent";
+import { loadingPageContent } from "./utils/utils";
+import NewsList from "./components/NewsList";
 
 const App = () => {
   const [pagePagination, setPagePagination] = useState({});
@@ -7,14 +8,14 @@ const App = () => {
   const [url, setURL] = useState('https://api.guap.ru/news/v2/get-list-pubs?page=1&itemsOnPage=3');
 
   useEffect(() => {
-    loadingPageContent(url,setPageItems, setPagePagination);
+    loadingPageContent(url, setPageItems, setPagePagination);
   }, []);
 
   return (
     <>
-      
+      <NewsList newsList={pageItems} />
     </>
   )
-}
+};
 
 export default App;
