@@ -1,0 +1,139 @@
+.person {
+    &_info {
+        background-color: $white-main;
+        border-radius: 20px;
+        padding: 24px;
+
+        &-share {
+            display: flex;
+            gap: $sp-6x;
+            align-items: end;
+            margin-bottom: $sp-6x;
+
+            &_img {
+                max-width: 235px;
+                // @media (max-width: $breakpoint-lg) {
+                //     width: 150px;
+                // }
+
+                @media (max-width: $breakpoint-md) {
+                    display: none;
+                }
+
+                & canvas {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: $breakpoint-md) {
+                display: none;
+                margin-bottom: 0;
+                justify-content: center;
+            }
+
+            &_buttons {
+                display: flex;
+                flex-direction: column;
+                gap: $sp-2x;
+
+                @media (max-width: $breakpoint-md) {
+                    flex-direction: row;
+                }
+
+                & button {
+                    display: flex;
+                    align-items: center;
+                    gap: $sp-3x;
+                    
+                    @media (max-width: $breakpoint-md) {
+                        font-size: $font-size-subtitle;
+                    }
+                }
+
+                & button.share_button {
+                    &::before {
+                        content: "\F52E";
+                        font-family: "bootstrap-icons"
+                    }
+                }
+
+                & button.download_button {
+                    background-color: $blue-100 !important;
+                    color: $primary-guap !important;
+                    &::before {
+                        content: "\F30A";
+                        font-family: "bootstrap-icons"
+                    }
+
+                    &:hover {
+                        background-color: $blue-200 !important;
+                    }
+                }
+            }
+        }
+
+
+        &-text {
+            max-width: 590px;
+
+            &_list {
+                font-weight: $font-weight-medium;
+                margin-bottom: 0;
+
+                & li {
+                    padding-left: $sp-3x;
+
+                    &::marker {
+                        font-family: 'bootstrap-icons';
+                    }
+
+                    &.telegram {
+                        &::marker {
+                            content: "\e91f";
+                            font-family: 'guap-icons';
+                        }
+                    }
+                    &.vk {
+                        &::marker {
+                            content: "\e91a";
+                            font-family: 'guap-icons';
+                        }
+                    }
+                    &.ok {
+                        &::marker {
+                            content: "\e91d";
+                            font-family: 'guap-icons';
+                        }
+                    }
+
+                    &.post {
+                        &::marker {
+                            content: "\F6FE";
+                        }
+                    }
+
+                    &.location {
+                        &::marker {
+                            content: "\F3E8";
+                        }
+                    }
+
+                    &.mail {
+                        &::marker {
+                            content: "\F32F";
+                        }
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: $breakpoint-md) {
+            width: 380px;
+        }
+
+        @media screen and (max-width: 400px) {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+}

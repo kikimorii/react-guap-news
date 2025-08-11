@@ -1,0 +1,26 @@
+nav > .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-1x;
+    list-style-type: none;
+    margin: 0px;
+    margin-bottom: $sp-6x;
+}
+
+.breadcrumb-item {
+    & a {
+        text-decoration: none;
+    }
+
+    &+ .breadcrumb-item::before {
+        display: inline-block;
+        padding-right: .5rem;
+        padding-left: .5rem;
+        color: #6c757d;
+        content: "/";
+    }
+
+    &.active {
+        color: $black-400;
+    }
+}

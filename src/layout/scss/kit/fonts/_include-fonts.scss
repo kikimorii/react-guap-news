@@ -1,0 +1,101 @@
+@charset "UTF-8";
+.font-roboto {
+    font-family: Roboto
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Light.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Regular.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Medium.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Bold.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto/Roboto-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+.font-robotomono {
+    font-family: "Roboto Mono"
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    src: url("https://src.guap.ru/fonts/v2/Roboto_Mono/static/RobotoMono-Light.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto_Mono/static/RobotoMono-Light.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+.font-robotocondensed {
+    font-family: "Roboto Condensed"
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("https://src.guap.ru/fonts/v2/Roboto_Condensed/RobotoCondensed-Regular.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto_Condensed/RobotoCondensed-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("https://src.guap.ru/fonts/v2/Roboto_Condensed/RobotoCondensed-Bold.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto_Condensed/RobotoCondensed-Bold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+.font-robotoslab {
+    font-family: "Roboto Slab"
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: url("https://src.guap.ru/fonts/v2/Roboto_Slab/static/RobotoSlab-Regular.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto_Slab/static/RobotoSlab-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: url("https://src.guap.ru/fonts/v2/Roboto_Slab/static/RobotoSlab-Bold.woff2") format("woff2"),url("https://src.guap.ru/fonts/v2/Roboto_Slab/static/RobotoSlab-Bold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-display: block;
+    font-family: guap-icons;
+    src: url("https://src.guap.ru/libs/guap-icons-11/fonts/guap-icons.eot?1zm9cz");
+    src: url("https://src.guap.ru/libs/guap-icons-11/fonts/guap-icons.eot?1zm9cz#iefix") format("embedded-opentype"),url("https://src.guap.ru/libs/guap-icons-11/fonts/guap-icons.ttf?1zm9cz") format("truetype"),url("https://src.guap.ru/libs/guap-icons-11/fonts/guap-icons.woff?1zm9cz") format("woff"),url("https://src.guap.ru/libs/guap-icons-11/fonts/guap-icons.svg?1zm9cz#guap-icons") format("svg")
+}
+
+@font-face {
+    font-display: block;
+    font-family: bootstrap-icons;
+    src: url("https://src.guap.ru/libs/bootstrap-icons/1.10.4/fonts/bootstrap-icons.woff2") format("woff2"),url("https://src.guap.ru/libs/bootstrap-icons/1.10.4/fonts/bootstrap-icons.woff") format("woff")
+}

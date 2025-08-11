@@ -1,0 +1,39 @@
+body, .header-menu_lists {
+    background-color: #F7FAFC;
+}
+
+@import "title";
+@import "contacts";
+@import "info";
+
+.person {
+    &_wrapper {
+        margin-top: $sp-10x;
+        margin-bottom: $sp-10x * 3;
+
+        @media (max-width: $breakpoint-md) {
+            margin-bottom: $sp-10x;
+        }
+
+        display: flex;
+        gap: $sp-6x;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: $breakpoint-md) {
+            flex-direction: column;
+        }
+    }
+
+    &_button-back {
+        padding: $sp-4x $sp-7x;
+        border-radius: $rad-3x;
+        
+        color: $primary-guap;
+        font-weight: $font-weight-medium;
+
+        &:hover {
+            background-color: $blue-200;
+        }
+    }
+}

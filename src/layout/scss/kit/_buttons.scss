@@ -1,0 +1,105 @@
+button {
+    border: 0px;
+    background: none;
+    border-radius: $rad-3x;
+    padding: $sp-2x;
+    cursor: pointer;
+
+    &.btn {
+        &-icon {
+            font-size: 1.2em;
+            color: $primary-guap;
+            &:hover {
+                background-color: $blue-100;
+            }
+        }
+
+        &-text {
+            font-weight: $font-weight-medium;
+            min-width: $button-min-size;
+            min-height: $button-min-size;
+            padding: $sp-4x $sp-7x;
+            border-radius: $rad-4x;
+            font-size: 0.8em;
+
+            color: $black-600;
+            &:hover {
+                color: $black-700;
+                background-color: $black-100;
+            }
+            
+            &.secondary {
+                color: $secondary-guap;
+                &:hover {
+                    background-color: $pink-100;
+                    color: $pink-700;
+                }
+            }
+            &.primary {
+                color: $primary-guap;
+                &:hover {
+                    background-color: $blue-100;
+                    color: $blue-700;
+                }
+            }
+            &.disabled {
+                color: $black-300;
+                cursor: default;
+                background: none;
+            }
+
+            &.filled {
+                background-color: $black-100;
+                &.secondary {
+                    color: $white-main;
+                    background-color: $secondary-guap;
+                    &:hover {
+                        background-color: $pink-600;
+                    }
+                }
+                &.primary {
+                    color: $white-main;
+                    background-color: $primary-guap;
+                    &:hover {
+                        background-color: $blue-600;
+                    }
+                }
+                &.disabled {
+                    color: $black-300;
+                    background-color: $black-100;
+                    cursor: default;
+                }
+            }
+
+            @media screen and (max-width: $breakpoint-md) {
+                padding: $sp-3x $sp-4x;
+            }
+        }
+
+        &-header {
+            color: $primary-guap;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                background-color: $blue-100;
+            }
+
+            &.active {
+                color: $secondary-guap;
+                background-color: $pink-100;
+            }
+
+            @media screen and (max-width: $breakpoint-lg) {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+// for header
+a.btn-icon {
+    @extend button;
+    display: inline-block;
+    text-decoration: none;
+}

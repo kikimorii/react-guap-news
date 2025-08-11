@@ -1,0 +1,51 @@
+.person {
+    &_title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 380px;
+
+        text-align: center;
+        
+        &-img {
+            max-width: 100%;
+            margin-bottom: $sp-2x;
+
+            border-radius: 30px;
+
+            &_wrapper {
+                position: relative;
+                max-width: 60%;
+            }
+
+            &_button {
+                display: none;
+
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background-color: $white-main;
+                border-radius: $rad-2x;
+                padding: $sp-1x;
+
+                @media screen and (max-width: $breakpoint-md) {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+        &-qr {
+            padding: $sp-4x;
+            background-color: $white-main;
+            border-radius: $rad-3x;
+            
+            margin-bottom: $sp-6x;
+        }
+
+        &-text {
+            font-size: 24px;
+        }
+    }
+}

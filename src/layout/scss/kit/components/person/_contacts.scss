@@ -1,0 +1,45 @@
+.person {
+    &_contacts {
+        max-width: 380px;
+        padding: 8px;
+
+        display: flex;
+        justify-content: space-around;
+
+        background-color: $white-main;
+        border-radius: 20px;
+
+        &-link {
+            padding: 6px;
+            min-width: 100px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            text-decoration: none;
+            border-radius: 12px;
+            
+            &:hover {
+                background-color: #F2F7FB;
+                color: $primary-guap;
+            }
+
+            &::before {
+                content: "\f3ee";
+                font-family: "bootstrap-icons";
+
+            }
+            &[href*='tel:'] {
+                &::before {
+                    content: '\F5C1';
+                }
+            }
+            &[href*='mailto:'] {
+                &::before {
+                    content: '\F32F';
+                }
+            }
+        }
+    }
+}
