@@ -8,7 +8,7 @@
     padding: $sp-3x;
     text-decoration: none;
     color: $black-main;
-    
+
     @media (max-width: $breakpoint-md) {
         flex-direction: column;
     }
@@ -53,4 +53,12 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
