@@ -141,6 +141,10 @@ html, body {
     background-color: inherit !important;
 }
 
+.main {
+    margin-bottom: $sp-4x;
+}
+
 @import "kit/breadcrumbs";
 @import "kit/buttons";
 @import "kit/links";
