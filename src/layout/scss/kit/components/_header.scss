@@ -163,6 +163,9 @@
 }
 
 .burger {
+    &.active {
+        margin-right: $sp-4x;
+    }
     &-icon {
         position: relative;
         width: 24px;

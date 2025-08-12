@@ -13,8 +13,9 @@ const footerContent = document.querySelector('footer');
 if (menuMobileBtn) {
     menuMobileBtn.addEventListener('click', () => {
         menuMobileIcon.classList.toggle("active");
-        mobileMenu.classList.toggle('active')
-        mainContent.classList.toggle('d-none')
+        menuMobileBtn.classList.toggle("active");
+        mobileMenu.classList.toggle('active');
+        mainContent.classList.toggle('d-none');
         footerContent.classList.toggle('d-none');
         siteMapLink.classList.toggle('d-none');
         siteSearchLink.classList.toggle('d-none');
