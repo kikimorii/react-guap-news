@@ -14,6 +14,7 @@ const footerContent = document.querySelector('footer');
 if (menuDesktopBtn != null) {
     menuDesktopBtn.addEventListener('click', function (event) {
         menuDesktopIcon.classList.toggle('active');
+        menuDesktopBtn.classList.toggle('active');
         desktopMenuTabs.classList.toggle('active');
         desktopMenu.classList.toggle('active')
         // desktopMenu.classList.toggle('d-none');
