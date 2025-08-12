@@ -4,10 +4,11 @@ import styles from './NewsListItem.module.scss';
 const NewsListItem = ({ id, title, abstract, mediaCatalog, date }) => {
     const dateOnPage = dateConvert(date);
     const photoURL = `https://media.guap.ru/${mediaCatalog}/_title.jpg?s=lg`;
+    const newsURL = `https://guap.ru/test/sample/news2/news?id=${id}`;
 
     return (
         <li key={id} className={styles.wrapper}>
-            <a href="#" className={styles.link}>
+            <a href={newsURL} className={styles.link}>
                 <img className={styles.img} src={photoURL} alt={title} />
                 <div className={styles.text}>
                     <div className={styles.mainText}>
