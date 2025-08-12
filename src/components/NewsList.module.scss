@@ -1,6 +1,33 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .list {
     display: flex;
     flex-direction: column;
     gap: $sp-2x;
     margin: 0;
+}
+
+.loader {
+    width: 25px;
+    height: 25px;
+    border: 2px solid $blue-600;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s ease-out infinite;
+
+    &Wrapper {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@keyframes spin {
+    0% { rotate: 0deg;}
+    100% { rotate: 360deg;}
 }
