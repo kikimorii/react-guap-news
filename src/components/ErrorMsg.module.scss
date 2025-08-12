@@ -1,0 +1,8 @@
+.img {
+    width: 100%;
+    height: auto;
+    margin: $sp-5x 0;
+    @media (max-width: $breakpoint-md) {
+        height: auto;
+    }
+}
