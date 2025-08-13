@@ -19,18 +19,23 @@
     justify-content: center;
     font-size: 0.8em;
     border-radius: $rad-5x;
+    color: $black-main;
 
     &Active {
         background-color: $cyan-main !important;
         color: $white-main;
+
         &:hover {
             cursor: auto;
         }
     }
 
-    &Dots:hover {
-        background-color: transparent !important;
-        cursor: auto;
+    &Dots {
+        color: $black-400;
+        &:hover {
+            background-color: transparent !important;
+            cursor: auto;
+        }
     }
 
     &:hover {
