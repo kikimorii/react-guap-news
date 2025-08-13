@@ -2,7 +2,8 @@ export default (date) => {
     const tempDate = new Date(date);
     const options = {
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
+        year: 'numeric',
     };
     const result = tempDate.toLocaleDateString('ru-RU', options);
     

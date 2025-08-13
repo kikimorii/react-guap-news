@@ -3,9 +3,11 @@ export default async (url, setPageItems, setPagePagination, setIsLoading) => {
     .then((response) => response.json())
     .then((loadedData) => {
       setPageItems(loadedData.items || {});
-      setPagePagination(loadedData.pagintaion || {});
+      setPagePagination(loadedData.pagination || {});
     }).finally(() => {
       setIsLoading(false);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 }
