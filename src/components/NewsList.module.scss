@@ -9,6 +9,11 @@
     flex-direction: column;
     gap: $sp-2x;
     margin: 0;
+    margin-bottom: $sp-4x;
+
+    @media (max-width: $breakpoint-md) {
+        gap: $sp-1x;
+    }
 }
 
 .loader {
