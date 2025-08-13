@@ -22,8 +22,7 @@
 
 .img {
     border-radius: $rad-3x;
-    min-width: 320px;
-    max-width: 320px;
+    aspect-ratio: 8/5;
     height: 200px;
     object-fit: cover;
 
@@ -56,10 +55,26 @@
     flex-direction: column;
 }
 
+.title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: $breakpoint-md) {
+        -webkit-line-clamp: none;
+    }
+}
+
 .description {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @media (max-width: $breakpoint-md) {
+        -webkit-line-clamp: none;
+    }
 }
