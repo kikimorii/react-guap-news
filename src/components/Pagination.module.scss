@@ -1,0 +1,43 @@
+.hidden {
+    display: none;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    gap: 8px;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: $sp-2x $sp-3x;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    border-radius: $rad-5x;
+
+    &Active {
+        background-color: $cyan-main !important;
+        color: $white-main;
+        &:hover {
+            cursor: auto;
+        }
+    }
+
+    &Dots:hover {
+        background-color: transparent !important;
+        cursor: auto;
+    }
+
+    &:hover {
+        background-color: $blue-200;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $sp-2x $sp-3x;
+    }
+}
