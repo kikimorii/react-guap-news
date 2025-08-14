@@ -1,31 +1,44 @@
-import { useEffect, useState } from "react";
-import { loadingPageContent } from "./utils/utils";
+import { useEffect, useState, useMemo } from "react";
+import { loadingPageContent, getQueryParams, getQueryString } from "./utils/utils";
 import NewsList from "./components/NewsList";
 
 const App = () => {
+  const [queryParams, setQueryParams] = useState(window.location.search ? getQueryParams() : { page: 1, });
+  const [numberOfPage, setNumberOfPage] = useState(Number(queryParams.page));
   const [pagePagination, setPagePagination] = useState({});
-  const [numberOfPage, setNumberOfPage] = useState(1);
   const [pageItems, setPageItems] = useState({});
-  const url = `https://api.guap.ru/news/v2/get-list-pubs?page=${numberOfPage}&itemsOnPage=10`;
+  const queryString = useMemo(() => getQueryString(queryParams), [queryParams]);
+  const url = `https://api.guap.ru/news/v2/get-list-pubs?${queryString}&itemsOnPage=10`;
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
-  }, [url]);
+    const qs = getQueryString(queryParams);
+    if (qs !== window.location.search.slice(1)) {
+      window.history.replaceState({}, "", `?${qs}`);
+    }
+  }, [queryParams]);
 
-  return (
-    <>
-      <NewsList
-        newsList={pageItems}
-        isLoading={isLoading}
-        pagePagination={pagePagination}
-        setNumberOfPage={setNumberOfPage}
-        numberOfPage={numberOfPage}
-      />
+  useEffect(() => {
+    setQueryParams({ ...queryParams, page: numberOfPage });
+}, [numberOfPage]);
 
-    </>
-  )
+useEffect(() => {
+  setIsLoading(true);
+  loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
+}, [url]);
+
+return (
+  <>
+    <NewsList
+      newsList={pageItems}
+      isLoading={isLoading}
+      pagePagination={pagePagination}
+      setNumberOfPage={setNumberOfPage}
+      numberOfPage={numberOfPage}
+    />
+
+  </>
+)
 };
 
 export default App;
