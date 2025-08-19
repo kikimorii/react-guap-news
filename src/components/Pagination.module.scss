@@ -10,6 +10,20 @@
     gap: 8px;
     margin: 0;
     flex-wrap: wrap;
+
+    @media (max-width: $breakpoint-sm) {
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        overflow-x: hidden;
+
+        & li {
+            flex-grow: 1;
+            & .button {
+                width: 100%;
+            }
+        }
+    }
 }
 
 .button {
