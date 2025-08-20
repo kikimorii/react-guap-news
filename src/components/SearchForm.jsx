@@ -1,14 +1,12 @@
 import styles from './SearchForm.module.scss';
 import { useEffect, useState } from 'react';
+import FilterTitle from './filter/FilterTitle';
+import FilterMenu from './filter/FilterMenu';
+import FilterSearch from './filter/FilterSearch';
 
 const SearchForm = ({ queryParams, setQueryParams }) => {
     const [currentQueryParams, setCurrentQueryParams] = useState(queryParams);
     const [filterCount, setFilterCount] = useState(null);
-    useEffect(() => {
-        setFilterCount(Object.keys(queryParams).length - 1);
-    }, [queryParams]);
-    const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
-
     const handleOnSubmit = (event) => {
         event.preventDefault();
         if (currentQueryParams.find === "") delete currentQueryParams.find
@@ -17,33 +15,18 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
     };
     const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
 
+    useEffect(() => {
+        setFilterCount(Object.keys(queryParams).length - 1);
+    }, [queryParams]);
+    const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
+
     return (
         <form className={styles.form} onSubmit={handleOnSubmit}>
-            <div className={styles.formTitle}>
-                <h1 className={styles.title}>Новости</h1>
-                <button className={`btn-text primary ${styles.filterButton}`} type='button' onClick={() => setIsFilterListVisiable(!isFilterListVisiable)}>
-                    <i className="bi bi-sliders"></i>
-                    Фильтры
-                    {filterCount > 0 ? <span className={styles.filterButtonCounter}>{filterCount}</span> : ""}
-                </button>
-            </div>
-            <div className={styles.filterWrapper}>
-                <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
-                    <h6>Добавить фильтры</h6>
-                    <button className={"btn-text secondary filled"} type="button">Применить</button>
-                </div>
-            </div>
-            <div className={styles.formSearch}>
-                <input
-                    value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
-                    className={styles.textInput}
-                    type="text"
-                    name="find"
-                    placeholder="Текст для поиска"
-                    onChange={handleOnChange}
-                />
-                <button type="submit" className="btn-text filled secondary">Найти</button>
-            </div>
+
+            <FilterTitle filterCount={filterCount} setIsFilterListVisiable={setIsFilterListVisiable} isFilterListVisiable={isFilterListVisiable} />
+            <FilterMenu isFilterListVisiable={isFilterListVisiable} />
+            <FilterSearch currentQueryParams={currentQueryParams} handleOnChange={handleOnChange} />
+
         </form>
     )
 };
