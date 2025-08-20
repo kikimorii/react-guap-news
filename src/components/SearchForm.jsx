@@ -6,8 +6,8 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
     const [filterCount, setFilterCount] = useState(null);
     useEffect(() => {
         setFilterCount(Object.keys(queryParams).length - 1);
-        // console.log(queryParams);
     }, [queryParams]);
+    const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
@@ -15,19 +15,23 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
         else currentQueryParams.find = encodeURIComponent(currentQueryParams.find)
         setQueryParams({ ...currentQueryParams });
     };
-    const handleOnChange = ({ target }) => {
-        setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
-    };
+    const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
 
     return (
         <form className={styles.form} onSubmit={handleOnSubmit}>
             <div className={styles.formTitle}>
                 <h1 className={styles.title}>Новости</h1>
-                <button className={`btn-text primary ${styles.filterButton}`} type='button'>
+                <button className={`btn-text primary ${styles.filterButton}`} type='button' onClick={() => setIsFilterListVisiable(!isFilterListVisiable)}>
                     <i className="bi bi-sliders"></i>
                     Фильтры
                     {filterCount > 0 ? <span className={styles.filterButtonCounter}>{filterCount}</span> : ""}
                 </button>
+            </div>
+            <div className={styles.filterWrapper}>
+                <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
+                    <h6>Добавить фильтры</h6>
+                    <button className={"btn-text secondary filled"} type="button">Применить</button>
+                </div>
             </div>
             <div className={styles.formSearch}>
                 <input

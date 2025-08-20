@@ -1,3 +1,7 @@
+.visiable {
+    display: flex !important;
+}
+
 .textInput {
     flex-grow: 1;
     padding: 0 $sp-4x 0 $sp-10x * 1.3;
@@ -14,16 +18,13 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: $sp-5x;
+    gap: $sp-3x;
     margin-bottom: $sp-9x;
-
-    @media (max-width: $breakpoint-md) {
-        display: none;
-    }
 
     &Title {
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         & h1 {
             margin-bottom: 0;
@@ -33,6 +34,10 @@
     &Search {
         display: flex;
         gap: $sp-5x;
+
+        @media (max-width: $breakpoint-md) {
+            display: none;
+        }
     }
 }
 
@@ -57,5 +62,23 @@
             background-color: $primary-guap;
             border-radius: 100%;
         }
+    }
+
+    &Wrapper {
+        position: relative;
+    }
+
+    &List {
+        display: none;
+        position: absolute;
+        right: 0;
+        // top: -$sp-5x;
+        min-width: 380px;
+        padding: $sp-4x;
+        background-color: white;
+        z-index: 1;
+        border-radius: $rad-4x;
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        flex-direction: column;
     }
 }
