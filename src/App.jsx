@@ -9,7 +9,7 @@ const App = () => {
   const [pagePagination, setPagePagination] = useState({});
   const [pageItems, setPageItems] = useState({});
   const queryString = useMemo(() => getQueryString(queryParams), [queryParams]);
-  const url = `https://api.guap.ru/news/v2/get-list-pubs?${queryString}&itemsOnPage=10`;
+  const url = `https://api.guap.ru/news/v2/get-list-pubs?${queryString}&itemsOnPage=11`;
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

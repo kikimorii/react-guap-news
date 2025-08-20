@@ -13,14 +13,22 @@ const Pagination = ({ currentPage, totalPages, setNumberOfPage, numberOfPage }) 
         <ul className={styles.list}>
             <li className={`${isFirst ? styles.hidden : ""}`}>
                 <button className={styles.button} onClick={() => {
+                    setNumberOfPage(1);
+                    handleClick();
+                }}>
+                    <i className="bi bi-chevron-double-left"></i>
+                </button>
+            </li>
+            {/* <li className={`${isFirst ? styles.hidden : ""}`}>
+                <button className={styles.button} onClick={() => {
                     setNumberOfPage(numberOfPage - 1);
                     handleClick();
                 }}>
                     <i className="bi bi-chevron-left"></i>
                 </button>
-            </li>
+            </li> */}
             {numbers.map((number, idx) => (
-                <li key={idx} className={`${numberOfPage === number ? styles.active : ""}`}>
+                <li key={idx}>
                     <button
                         className={`${styles.button} ${numberOfPage === number ? styles.buttonActive : ''} ${!Boolean(Number(number)) ? styles.buttonDots : ''}`}
                         disabled={!Boolean(Number(number)) || numberOfPage === number}
@@ -33,12 +41,20 @@ const Pagination = ({ currentPage, totalPages, setNumberOfPage, numberOfPage }) 
                     </button>
                 </li>
             ))}
-            <li className={`${isLast ? styles.hidden : ""}`}>
+            {/* <li className={`${isLast ? styles.hidden : ""}`}>
                 <button className={styles.button} onClick={() => {
                     setNumberOfPage(numberOfPage + 1);
                     handleClick();
                 }}>
                     <i className="bi bi-chevron-right"></i>
+                </button>
+            </li> */}
+            <li className={`${isLast ? styles.hidden : ""}`}>
+                <button className={styles.button} onClick={() => {
+                    setNumberOfPage(totalPages);
+                    handleClick();
+                }}>
+                    <i className="bi bi-chevron-double-right"></i>
                 </button>
             </li>
         </ul>

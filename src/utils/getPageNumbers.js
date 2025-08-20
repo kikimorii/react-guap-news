@@ -1,27 +1,21 @@
 export default (currentPage, totalPages) => {
-    const pageNumbers = [];
-    const lineBreak = "...";
+  const pageNumbers = [];
 
-    const startPage = Math.max(2, currentPage - 2);
-    const endPage = Math.min(totalPages - 1, currentPage + 2);
+  let startPage = currentPage - 2;
+  let endPage = currentPage + 2;
 
-    pageNumbers.push(1);
+  if (currentPage <= 3) {
+    startPage = 1;
+    endPage = Math.min(5, totalPages);
+  }
+  else if (currentPage >= totalPages - 2) {
+    startPage = Math.max(totalPages - 4, 1);
+    endPage = totalPages;
+  }
 
-    if (startPage > 2) {
-        pageNumbers.push(lineBreak);
-    }
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
-    for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-    }
-
-    if (endPage < totalPages - 1) {
-        pageNumbers.push(lineBreak);
-    }
-
-    if (totalPages > 1) {
-        pageNumbers.push(totalPages);
-    }
-
-    return pageNumbers;
+  return pageNumbers;
 };
