@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { loadingPageContent, getQueryParams, getQueryString } from "./utils/utils";
 import NewsList from "./components/NewsList";
+import SearchForm from './components/SearchForm';
 
 const App = () => {
   const [queryParams, setQueryParams] = useState(window.location.search ? getQueryParams() : { page: 1, });
@@ -29,6 +30,7 @@ useEffect(() => {
 
 return (
   <>
+    <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} />
     <NewsList
       newsList={pageItems}
       isLoading={isLoading}

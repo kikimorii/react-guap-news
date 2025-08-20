@@ -1,0 +1,22 @@
+.textInput {
+    flex-grow: 1;
+    padding: 0 $sp-4x 0 $sp-10x * 1.3;
+    border-radius: $rad-4x;
+    border: none;
+    background-color: #F6F6F6;
+    font-size: $font-size-subtitle;
+    background-image: url(/search.svg);
+    background-repeat: no-repeat;
+    background-position: $sp-4x;
+    backdrop-filter: blur(10px);
+}
+
+.form {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 36px;
+
+    @media (max-width: $breakpoint-md) {
+        display: none;
+    }
+}
