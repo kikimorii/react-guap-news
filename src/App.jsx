@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { loadingPageContent, getQueryParams, getQueryString } from "./utils/utils";
 import NewsList from "./components/NewsList";
+import SearchForm from './components/SearchForm';
 
 const App = () => {
   const [queryParams, setQueryParams] = useState(window.location.search ? getQueryParams() : { page: 1, });
@@ -16,29 +17,31 @@ const App = () => {
     if (qs !== window.location.search.slice(1)) {
       window.history.replaceState({}, "", `?${qs}`);
     }
+    setNumberOfPage(Number(queryParams.page));
   }, [queryParams]);
 
   useEffect(() => {
     setQueryParams({ ...queryParams, page: numberOfPage });
-}, [numberOfPage]);
+  }, [numberOfPage]);
 
-useEffect(() => {
-  setIsLoading(true);
-  loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
-}, [url]);
+  useEffect(() => {
+    setIsLoading(true);
+    loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
+  }, [url]);
 
-return (
-  <>
-    <NewsList
-      newsList={pageItems}
-      isLoading={isLoading}
-      pagePagination={pagePagination}
-      setNumberOfPage={setNumberOfPage}
-      numberOfPage={numberOfPage}
-    />
+  return (
+    <>
+      <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} />
+      <NewsList
+        newsList={pageItems}
+        isLoading={isLoading}
+        pagePagination={pagePagination}
+        setNumberOfPage={setNumberOfPage}
+        numberOfPage={numberOfPage}
+      />
 
-  </>
-)
+    </>
+  )
 };
 
 export default App;

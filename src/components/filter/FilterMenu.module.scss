@@ -1,0 +1,29 @@
+.filter {
+    &Wrapper {
+        position: relative;
+    }
+
+    &List {
+        display: none;
+        position: absolute;
+        right: 0;
+        // top: -$sp-5x;
+        width: 380px;
+        padding: $sp-4x;
+        background-color: white;
+        z-index: 1;
+        border-radius: $rad-4x;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+        flex-direction: column;
+    }
+}
+
+.visiable {
+    display: flex;
+}
+
+.selectsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $sp-3x;
+}
