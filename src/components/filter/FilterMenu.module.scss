@@ -8,7 +8,7 @@
         position: absolute;
         right: 0;
         // top: -$sp-5x;
-        min-width: 380px;
+        width: 380px;
         padding: $sp-4x;
         background-color: white;
         z-index: 1;
@@ -20,4 +20,10 @@
 
 .visiable {
     display: flex;
+}
+
+.selectsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $sp-3x;
 }

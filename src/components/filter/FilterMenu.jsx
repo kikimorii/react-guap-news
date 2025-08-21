@@ -2,13 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./FilterMenu.module.scss";
 import Select from "react-select";
 
-// const FILTER_LINKS = {
-//     nodesids: "https://api.guap.ru/news/v2/get-active-nodes",
-//     categoriesids: "https://api.guap.ru/news/v2/get-reg-categories",
-//     tagsids: "https://api.guap.ru/news/v2/get-reg-tags",
-//     targetsids: "https://api.guap.ru/news/v2/get-reg-targets",
-// };
-
 const FILTER_LINKS = [
     ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
     ["categoriesids", "Рубрики", "https://api.guap.ru/news/v2/get-reg-categories"],
@@ -30,7 +23,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                         option.label = elem.title;
                         return option;
                     });
-                    setSelectsContent((prev) => ({ ...prev, [key]: {options: selectContent(), "placeholder": placeholder} }))
+                    setSelectsContent((prev) => ({ ...prev, [key]: { options: selectContent(), "placeholder": placeholder } }))
                 });
         }));
     }, []);
@@ -48,7 +41,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
 
     const handlerOnChange = (key, data) => {
         const values = data.map((elem) => elem.value);
-        const newCurrentQueryParams = {...currentQueryParams, [key]: values};
+        const newCurrentQueryParams = { ...currentQueryParams, [key]: values };
         if (values.length === 0) delete newCurrentQueryParams[key]
         setCurrentQueryParams(newCurrentQueryParams);
     }
@@ -57,18 +50,66 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
         <div className={styles.filterWrapper}>
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
                 <h6>Добавить фильтры</h6>
-                {selectsContent.length !== 0 
-                    ? (Object.entries(selectsContent).map(([key, {options, placeholder}]) => (
-                    <Select
-                        key={key}
-                        options={options}
-                        isMulti
-                        defaultValue={defaultValues(key, options)}
-                        onChange={(data) => handlerOnChange(key, data)}
-                        placeholder={placeholder}
-                    />
-                ))) : ""}
-                <button className={"btn-text secondary filled"} type="submit">Применить</button>
+                <div className={styles.selectsWrapper}>
+                    {selectsContent.length !== 0
+                        ? (Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
+                            <Select
+                                key={key}
+                                options={options}
+                                isMulti
+                                defaultValue={defaultValues(key, options)}
+                                onChange={(data) => handlerOnChange(key, data)}
+                                placeholder={placeholder}
+                                styles={{
+                                    option: (base, { isFocused, isSelected }) => ({
+                                        ...base,
+                                        fontSize: "16px",
+                                        border: `1px solid #F6F6F6`,
+                                        boxSizing: "border-box",
+                                        padding: "12px",
+                                        backgroundColor: isFocused ? "#F2F7FB" : "white",
+                                        color: isFocused ? "#005AAA" : "black"
+                                    }),
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles,
+                                        fontSize: "16px",
+                                        border: "none",
+                                        backgroundColor: "#F6F6F6",
+                                        borderRadius: "12px",
+                                        padding: "8px"
+                                    }),
+                                    indicatorSeparator: () => ({
+                                        background: "transparent"
+                                    }),
+                                    menu: (base) => ({
+                                        ...base,
+                                        borderRadius: "12px",
+                                        paddingTop: "8px",
+                                        paddingBottom: "8px"
+                                    }),
+
+                                    multiValue: (styles) => ({
+                                        ...styles,
+                                        background: "none",
+                                    }),
+                                    multiValueLabel: (styles) => ({
+                                        ...styles,
+                                        color: "#005AAA",
+                                        fontSize: "16px",
+                                    }),
+                                    multiValueRemove: (styles) => ({
+                                        ...styles,
+                                        color: "#005AAA",
+                                        ':hover': {
+                                            color: 'white',
+                                            background: "#005AAA"
+                                        },
+                                    }),
+                                }}
+                            />
+                        ))) : ""}
+                    <button className={"btn-text secondary filled"} type="submit">Применить</button>
+                </div>
             </div>
         </div>
     );
