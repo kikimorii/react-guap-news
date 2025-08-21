@@ -10,7 +10,10 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
     const handleOnSubmit = (event) => {
         event.preventDefault();
         if (currentQueryParams.find === "" || currentQueryParams.find == undefined) delete currentQueryParams.find
-        else currentQueryParams.find = encodeURIComponent(currentQueryParams.find)
+        else if (queryParams.find !== currentQueryParams.find) {
+            currentQueryParams.find = encodeURIComponent(currentQueryParams.find)
+        };
+        console.log(currentQueryParams);
         setQueryParams({ ...currentQueryParams, page: 1 });
     };
     const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
