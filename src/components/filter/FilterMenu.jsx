@@ -2,18 +2,25 @@ import { useEffect, useState } from "react";
 import styles from "./FilterMenu.module.scss";
 import Select from "react-select";
 
-const FILTER_LINKS = {
-    nodesids: "https://api.guap.ru/news/v2/get-active-nodes",
-    categoriesids: "https://api.guap.ru/news/v2/get-reg-categories",
-    tagsids: "https://api.guap.ru/news/v2/get-reg-tags",
-    targetsids: "https://api.guap.ru/news/v2/get-reg-targets",
-};
+// const FILTER_LINKS = {
+//     nodesids: "https://api.guap.ru/news/v2/get-active-nodes",
+//     categoriesids: "https://api.guap.ru/news/v2/get-reg-categories",
+//     tagsids: "https://api.guap.ru/news/v2/get-reg-tags",
+//     targetsids: "https://api.guap.ru/news/v2/get-reg-targets",
+// };
+
+const FILTER_LINKS = [
+    ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
+    ["categoriesids", "Рубрики", "https://api.guap.ru/news/v2/get-reg-categories"],
+    ["tagsids", "Тэги", "https://api.guap.ru/news/v2/get-active-tags"],
+    ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
+]
 
 const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams }) => {
     const [selectsContent, setSelectsContent] = useState({});
 
     useEffect(() => {
-        Promise.all(Object.entries(FILTER_LINKS).map(([key, url]) => {
+        Promise.all(FILTER_LINKS.map(([key, placeholder, url]) => {
             fetch(url)
                 .then((response) => response.json())
                 .then((loadedData) => {
@@ -23,7 +30,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                         option.label = elem.title;
                         return option;
                     });
-                    setSelectsContent((prev) => ({ ...prev, [key]: selectContent() }))
+                    setSelectsContent((prev) => ({ ...prev, [key]: {options: selectContent(), "placeholder": placeholder} }))
                 });
         }));
     }, []);
@@ -51,13 +58,14 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
                 <h6>Добавить фильтры</h6>
                 {selectsContent.length !== 0 
-                    ? (Object.entries(selectsContent).map(([key, options]) => (
+                    ? (Object.entries(selectsContent).map(([key, {options, placeholder}]) => (
                     <Select
                         key={key}
                         options={options}
                         isMulti
                         defaultValue={defaultValues(key, options)}
                         onChange={(data) => handlerOnChange(key, data)}
+                        placeholder={placeholder}
                     />
                 ))) : ""}
                 <button className={"btn-text secondary filled"} type="submit">Применить</button>

@@ -7,21 +7,21 @@ import FilterSearch from './filter/FilterSearch';
 const SearchForm = ({ queryParams, setQueryParams }) => {
     const [currentQueryParams, setCurrentQueryParams] = useState(queryParams);
     const [filterCount, setFilterCount] = useState(null);
+    const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
     const handleOnSubmit = (event) => {
         event.preventDefault();
         if (currentQueryParams.find === "" || currentQueryParams.find == undefined) delete currentQueryParams.find
         else if (queryParams.find !== currentQueryParams.find) {
             currentQueryParams.find = encodeURIComponent(currentQueryParams.find)
         };
-        console.log(currentQueryParams);
         setQueryParams({ ...currentQueryParams, page: 1 });
+        setIsFilterListVisiable(false);
     };
     const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
 
     useEffect(() => {
         setFilterCount(Object.keys(queryParams).length - 1);
     }, [queryParams]);
-    const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
 
     return (
         <form className={styles.form} onSubmit={handleOnSubmit}>
