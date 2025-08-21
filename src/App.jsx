@@ -17,6 +17,7 @@ const App = () => {
     if (qs !== window.location.search.slice(1)) {
       window.history.replaceState({}, "", `?${qs}`);
     }
+    setNumberOfPage(Number(queryParams.page));
   }, [queryParams]);
 
   useEffect(() => {
