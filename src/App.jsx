@@ -21,26 +21,26 @@ const App = () => {
 
   useEffect(() => {
     setQueryParams({ ...queryParams, page: numberOfPage });
-}, [numberOfPage]);
+  }, [numberOfPage]);
 
-useEffect(() => {
-  setIsLoading(true);
-  loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
-}, [url]);
+  useEffect(() => {
+    setIsLoading(true);
+    loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
+  }, [url]);
 
-return (
-  <>
-    <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} />
-    <NewsList
-      newsList={pageItems}
-      isLoading={isLoading}
-      pagePagination={pagePagination}
-      setNumberOfPage={setNumberOfPage}
-      numberOfPage={numberOfPage}
-    />
+  return (
+    <>
+      <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} />
+      <NewsList
+        newsList={pageItems}
+        isLoading={isLoading}
+        pagePagination={pagePagination}
+        setNumberOfPage={setNumberOfPage}
+        numberOfPage={numberOfPage}
+      />
 
-  </>
-)
+    </>
+  )
 };
 
 export default App;

@@ -9,9 +9,9 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
     const [filterCount, setFilterCount] = useState(null);
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        if (currentQueryParams.find === "") delete currentQueryParams.find
+        if (currentQueryParams.find === "" || currentQueryParams.find == undefined) delete currentQueryParams.find
         else currentQueryParams.find = encodeURIComponent(currentQueryParams.find)
-        setQueryParams({ ...currentQueryParams });
+        setQueryParams({ ...currentQueryParams, page: 1 });
     };
     const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
 
@@ -24,7 +24,7 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
         <form className={styles.form} onSubmit={handleOnSubmit}>
 
             <FilterTitle filterCount={filterCount} setIsFilterListVisiable={setIsFilterListVisiable} isFilterListVisiable={isFilterListVisiable} />
-            <FilterMenu isFilterListVisiable={isFilterListVisiable} />
+            <FilterMenu isFilterListVisiable={isFilterListVisiable} currentQueryParams={currentQueryParams} setCurrentQueryParams={setCurrentQueryParams} />
             <FilterSearch currentQueryParams={currentQueryParams} handleOnChange={handleOnChange} />
 
         </form>
