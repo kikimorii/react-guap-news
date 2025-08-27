@@ -14,6 +14,12 @@
     gap: $sp-3x;
     position: relative;
 
+    & i {
+        @media (max-width: $breakpoint-md) {
+            font-size: 20px !important;
+        }
+    }
+
     &Counter {
         position: absolute;
         top: -10px;
@@ -26,5 +32,11 @@
         color: $white-main;
         background-color: $primary-guap;
         border-radius: 100%;
+    }
+
+    &Title {
+        @media (max-width: $breakpoint-md) {
+            display: none;
+        }
     }
 }

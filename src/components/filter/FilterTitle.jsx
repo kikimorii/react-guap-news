@@ -6,7 +6,7 @@ const FiltreTitle = ({filterCount, setIsFilterListVisiable, isFilterListVisiable
             <h1>Новости</h1>
             <button className={`btn-text primary ${styles.button}`} type='button' onClick={() => setIsFilterListVisiable(!isFilterListVisiable)}>
                 <i className="bi bi-sliders"></i>
-                Фильтры
+                <span className={styles.buttonTitle}>Фильтры</span>
                 {filterCount > 0 ? <span className={styles.buttonCounter}>{filterCount}</span> : ""}
             </button>
         </div>
