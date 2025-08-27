@@ -18,13 +18,18 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
         setIsFilterListVisiable(false);
     };
     const handleOnChange = ({ target }) => setCurrentQueryParams({ ...currentQueryParams, [target.name]: target.value });
+    const resetQueryParams = () => {
+        setQueryParams({ page: 1 });
+        setCurrentQueryParams({ page: 1 });
+        setIsFilterListVisiable(false);
+    };
 
     useEffect(() => {
         setFilterCount(Object.keys(queryParams).length - 1);
     }, [queryParams]);
 
     return (
-        <form className={styles.form} onSubmit={handleOnSubmit}>
+        <form className={styles.form} onSubmit={handleOnSubmit} id="searchForm">
 
             <FilterTitle filterCount={filterCount} setIsFilterListVisiable={setIsFilterListVisiable} isFilterListVisiable={isFilterListVisiable} />
             <FilterMenu
@@ -33,6 +38,7 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
                 setCurrentQueryParams={setCurrentQueryParams}
                 handleOnChangeInput={handleOnChange}
                 setIsFilterListVisiable={setIsFilterListVisiable}
+                resetQueryParams={resetQueryParams}
             />
             <FilterSearch currentQueryParams={currentQueryParams} handleOnChange={handleOnChange} />
 

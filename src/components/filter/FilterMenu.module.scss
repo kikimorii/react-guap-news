@@ -40,6 +40,23 @@
             opacity: 0.6;
         }
     }
+
+    &Menu {
+        &Title {
+            &Text {
+                margin-bottom: 0;
+            }
+
+            &Wrapper {
+                margin-bottom: $sp-4x;
+                &Mobile {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
 }
 
 .visiable {

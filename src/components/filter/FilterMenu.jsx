@@ -10,7 +10,7 @@ const FILTER_LINKS = [
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
 ]
 
-const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable }) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable, resetQueryParams }) => {
     const [selectsContent, setSelectsContent] = useState({});
 
     const [isMobile, setIsMobile] = useState(false);
@@ -60,24 +60,20 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
         <div className={styles.filterWrapper}>
             <div className={`${isFilterListVisiable ? styles.filterBackground : ""}`} onClick={() => setIsFilterListVisiable(false)}></div>
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
-                <h6>Добавить фильтры</h6>
+                <div className={`${styles.filterMenuTitleWrapper} ${isMobile ? styles.filterMenuTitleWrapperMobile : ""}`}>
+                    <h6 className={styles.filterMenuTitleText}>{isMobile ? "Фильры и поиск" : "Добавить фильтры"}</h6>
+                    {(isMobile) && (Object.entries(currentQueryParams).length > 1) ? (
+                        <button className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
+                    ) : ""}
+                </div>
                 <div className={styles.selectsWrapper}>
-                    {isMobile ? 
-                    (<input
-                        value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
-                        className={styles.input}
-                        type="text"
-                        name="find"
-                        placeholder="Текст для поиска"
-                        onChange={handleOnChangeInput}
-                    />) : ""}
                     {selectsContent.length !== 0
                         ? (Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
                             <Select
                                 key={key}
                                 options={options}
                                 isMulti
-                                defaultValue={defaultValues(key, options)}
+                                value={defaultValues(key, options)}
                                 onChange={(data) => handlerOnChange(key, data)}
                                 placeholder={placeholder}
                                 menuPlacement={isMobile ? "top" : "bottom"}
@@ -86,6 +82,15 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                                 isSearchable={false}
                             />
                         ))) : ""}
+                    {isMobile ?
+                        (<input
+                            value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
+                            className={styles.input}
+                            type="text"
+                            name="find"
+                            placeholder="Текст для поиска"
+                            onChange={handleOnChangeInput}
+                        />) : ""}
                     <button className={"btn-text secondary filled"} type="submit">Применить</button>
                 </div>
             </div>
