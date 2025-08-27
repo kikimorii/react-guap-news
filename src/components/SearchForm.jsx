@@ -27,7 +27,13 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
         <form className={styles.form} onSubmit={handleOnSubmit}>
 
             <FilterTitle filterCount={filterCount} setIsFilterListVisiable={setIsFilterListVisiable} isFilterListVisiable={isFilterListVisiable} />
-            <FilterMenu isFilterListVisiable={isFilterListVisiable} currentQueryParams={currentQueryParams} setCurrentQueryParams={setCurrentQueryParams} handleOnChangeInput={handleOnChange} />
+            <FilterMenu
+                isFilterListVisiable={isFilterListVisiable}
+                currentQueryParams={currentQueryParams}
+                setCurrentQueryParams={setCurrentQueryParams}
+                handleOnChangeInput={handleOnChange}
+                setIsFilterListVisiable={setIsFilterListVisiable}
+            />
             <FilterSearch currentQueryParams={currentQueryParams} handleOnChange={handleOnChange} />
 
         </form>

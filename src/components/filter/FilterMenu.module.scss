@@ -24,6 +24,20 @@
             right: 0;
             bottom: -100%;
             transition: bottom 0.3s ease;
+            z-index: 11;
+        }
+    }
+
+    &Background {
+        @media (max-width: $breakpoint-md) {
+            background-color: black;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            opacity: 0.6;
         }
     }
 }
@@ -36,7 +50,7 @@
     @media (width: $breakpoint-md) {
         bottom: 0;
     }
-    
+
     @media (max-width: $breakpoint-md) {
         bottom: 0;
     }

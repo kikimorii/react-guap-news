@@ -10,7 +10,7 @@ const FILTER_LINKS = [
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
 ]
 
-const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput }) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable }) => {
     const [selectsContent, setSelectsContent] = useState({});
 
     const [isMobile, setIsMobile] = useState(false);
@@ -58,6 +58,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
 
     return (
         <div className={styles.filterWrapper}>
+            <div className={`${isFilterListVisiable ? styles.filterBackground : ""}`} onClick={() => setIsFilterListVisiable(false)}></div>
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
                 <h6>Добавить фильтры</h6>
                 <div className={styles.selectsWrapper}>
