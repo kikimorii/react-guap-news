@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./FilterMenu.module.scss";
 import Select from "react-select";
+import selectStyles from './FilterMenuSelectStyles';
 
 const FILTER_LINKS = [
     ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
@@ -9,8 +10,17 @@ const FILTER_LINKS = [
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
 ]
 
-const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams }) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable }) => {
     const [selectsContent, setSelectsContent] = useState({});
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkScreen = () => setIsMobile(window.innerWidth < 768);
+        checkScreen();
+        window.addEventListener("resize", checkScreen);
+        return () => window.removeEventListener("resize", checkScreen);
+    }, []);
 
     useEffect(() => {
         Promise.all(FILTER_LINKS.map(([key, placeholder, url]) => {
@@ -48,9 +58,19 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
 
     return (
         <div className={styles.filterWrapper}>
+            <div className={`${isFilterListVisiable ? styles.filterBackground : ""}`} onClick={() => setIsFilterListVisiable(false)}></div>
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
                 <h6>Добавить фильтры</h6>
                 <div className={styles.selectsWrapper}>
+                    {isMobile ? 
+                    (<input
+                        value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
+                        className={styles.input}
+                        type="text"
+                        name="find"
+                        placeholder="Текст для поиска"
+                        onChange={handleOnChangeInput}
+                    />) : ""}
                     {selectsContent.length !== 0
                         ? (Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
                             <Select
@@ -60,52 +80,9 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                                 defaultValue={defaultValues(key, options)}
                                 onChange={(data) => handlerOnChange(key, data)}
                                 placeholder={placeholder}
-                                styles={{
-                                    option: (base, { isFocused, isSelected }) => ({
-                                        ...base,
-                                        fontSize: "16px",
-                                        border: `1px solid #F6F6F6`,
-                                        boxSizing: "border-box",
-                                        padding: "12px",
-                                        backgroundColor: isFocused ? "#F2F7FB" : "white",
-                                        color: isFocused ? "#005AAA" : "black"
-                                    }),
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        fontSize: "16px",
-                                        border: "none",
-                                        backgroundColor: "#F6F6F6",
-                                        borderRadius: "12px",
-                                        padding: "8px"
-                                    }),
-                                    indicatorSeparator: () => ({
-                                        background: "transparent"
-                                    }),
-                                    menu: (base) => ({
-                                        ...base,
-                                        borderRadius: "12px",
-                                        paddingTop: "8px",
-                                        paddingBottom: "8px"
-                                    }),
-
-                                    multiValue: (styles) => ({
-                                        ...styles,
-                                        background: "none",
-                                    }),
-                                    multiValueLabel: (styles) => ({
-                                        ...styles,
-                                        color: "#005AAA",
-                                        fontSize: "16px",
-                                    }),
-                                    multiValueRemove: (styles) => ({
-                                        ...styles,
-                                        color: "#005AAA",
-                                        ':hover': {
-                                            color: 'white',
-                                            background: "#005AAA"
-                                        },
-                                    }),
-                                }}
+                                menuPlacement={isMobile ? "top" : "bottom"}
+                                // menuShouldBlockScroll={true}
+                                styles={selectStyles}
                             />
                         ))) : ""}
                     <button className={"btn-text secondary filled"} type="submit">Применить</button>
