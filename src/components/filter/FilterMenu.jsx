@@ -81,8 +81,9 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                                 onChange={(data) => handlerOnChange(key, data)}
                                 placeholder={placeholder}
                                 menuPlacement={isMobile ? "top" : "bottom"}
-                                // menuShouldBlockScroll={true}
+                                menuShouldBlockScroll={true}
                                 styles={selectStyles}
+                                isSearchable={false}
                             />
                         ))) : ""}
                     <button className={"btn-text secondary filled"} type="submit">Применить</button>
