@@ -4,7 +4,7 @@ import Select from "react-select";
 import selectStyles from './FilterMenuSelectStyles';
 
 const FILTER_LINKS = [
-    ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
+    ["nodesids", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
     ["categoriesids", "Рубрики", "https://api.guap.ru/news/v2/get-reg-categories"],
     ["tagsids", "Тэги", "https://api.guap.ru/news/v2/get-active-tags"],
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
@@ -62,7 +62,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
             <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
                 <div className={`${styles.filterMenuTitleWrapper} ${isMobile ? styles.filterMenuTitleWrapperMobile : ""}`}>
                     <h6 className={styles.filterMenuTitleText}>{isMobile ? "Фильры и поиск" : "Добавить фильтры"}</h6>
-                    {(isMobile) && (Object.entries(currentQueryParams).length > 1) ? (
+                    {Object.entries(currentQueryParams).length > 1 ? (
                         <button className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
                     ) : ""}
                 </div>

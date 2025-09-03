@@ -1,5 +1,3 @@
-
-
 .form {
     display: flex;
     flex-direction: column;
@@ -7,7 +5,7 @@
     margin-bottom: $sp-9x;
 
     @media (max-width: $breakpoint-md) {
-        margin-bottom: 0;
+        margin-bottom: $sp-4x;
     }
 
     &Title {
