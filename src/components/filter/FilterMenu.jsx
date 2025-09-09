@@ -4,6 +4,7 @@ import Select from "react-select";
 import selectStyles from './FilterMenuSelectStyles';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import "./DatePicker.scss";
+import "react-multi-date-picker/styles/layouts/mobile.css"
 
 const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 const months = [
@@ -141,6 +142,11 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                     )}
                     <div className={styles.datePickerWrapper}>
                         <DatePicker
+                            className={isMobile ? "rmdp-mobile" : ""}
+                            mobileLabels={{
+                                OK: "Принять",
+                                CANCEL: "Закрыть",
+                            }}
                             inputClass={styles.datePickerInput}
                             range
                             rangeHover
