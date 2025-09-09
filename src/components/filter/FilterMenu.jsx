@@ -45,7 +45,6 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                             value: String(elem.id),
                             label: elem.title,
                         }));
-
                         setSelectsContent((prev) => ({
                             ...prev,
                             [key]: { options: selectContent, placeholder },
@@ -69,7 +68,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
     const handlerOnChange = (key, data) => {
         const values = data.map((elem) => elem.value);
         const newCurrentQueryParams = { ...currentQueryParams, [key]: values };
-        if (values.length === 0) delete newCurrentQueryParams[key]
+        if (values.length === 0) delete newCurrentQueryParams[key];
         setCurrentQueryParams(newCurrentQueryParams);
     };
 
