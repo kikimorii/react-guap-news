@@ -1,0 +1,11 @@
+.rmdp-day, .rmdp-week-day {
+    @media (max-width: 450px) {
+        height: 34px !important;
+        width: 34px !important;
+    }
+}
+
+
+.rmdp-container {
+    display: block !important;
+}

@@ -31,6 +31,8 @@ const FilterChips = ({ currentQueryParams, resetQueryParams, deleteQueryParam })
     const filterParams = { ...currentQueryParams };
     delete filterParams.page;
     delete filterParams.find;
+    delete filterParams.begin;
+    delete filterParams.end;
 
     const chipsContent = [];
 
