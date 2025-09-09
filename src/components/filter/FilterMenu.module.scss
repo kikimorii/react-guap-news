@@ -40,6 +40,28 @@
             opacity: 0.6;
         }
     }
+
+    &Menu {
+        &Title {
+            &Text {
+                margin-bottom: 0;
+                padding: 12.2px 0px;
+            }
+
+            &Wrapper {
+                margin-bottom: $sp-4x;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &Mobile {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
 }
 
 .datePicker {

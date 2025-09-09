@@ -1,0 +1,38 @@
+.chips {
+    display: flex;
+    align-items: center;
+    gap: $sp-2x;
+    white-space: nowrap;
+
+    @media (max-width: $breakpoint-md) {
+        gap: calc($sp-2x / 4 * 3);
+        padding: $sp-2x $sp-3x !important;
+        flex-shrink: 0;
+        min-height: auto !important;
+
+        & img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &Wrapper {
+        margin: 0;
+        display: flex;
+        gap: $sp-3x;
+        flex-wrap: wrap;
+
+        @media (max-width: $breakpoint-md) {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+    }
+
+    &Tag {
+        background-color: $blue-100;
+
+        &:hover {
+            background-color: $blue-200 !important;
+        }
+    }
+}

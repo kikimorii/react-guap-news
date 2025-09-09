@@ -12,7 +12,7 @@ const months = [
 ];
 
 const FILTER_LINKS = [
-    ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
+    ["nodesids", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
     ["categoriesids", "Рубрики", "https://api.guap.ru/news/v2/get-reg-categories"],
     ["tagsids", "Тэги", "https://api.guap.ru/news/v2/get-active-tags"],
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
@@ -25,6 +25,7 @@ const FiltreMenu = ({
     handleOnChangeInput,
     setIsFilterListVisiable
 }) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable, resetQueryParams }) => {
     const [selectsContent, setSelectsContent] = useState({});
     const [beginDate, setBeginDate] = useState(currentQueryParams.begin || "");
     const [endDate, setEndDate] = useState(currentQueryParams.end || "");
@@ -111,6 +112,32 @@ const FiltreMenu = ({
                 <div className={styles.selectsWrapper}>
                     {isMobile && (
                         <input
+            <div className={`${isFilterListVisiable ? styles.filterBackground : ""}`} onClick={() => setIsFilterListVisiable(false)}></div>
+            <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
+                <div className={`${styles.filterMenuTitleWrapper} ${isMobile ? styles.filterMenuTitleWrapperMobile : ""}`}>
+                    <h6 className={styles.filterMenuTitleText}>{isMobile ? "Фильры и поиск" : "Добавить фильтры"}</h6>
+                    {Object.entries(currentQueryParams).length > 1 ? (
+                        <button className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
+                    ) : ""}
+                </div>
+                <div className={styles.selectsWrapper}>
+                    {selectsContent.length !== 0
+                        ? (Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
+                            <Select
+                                key={key}
+                                options={options}
+                                isMulti
+                                value={defaultValues(key, options)}
+                                onChange={(data) => handlerOnChange(key, data)}
+                                placeholder={placeholder}
+                                menuPlacement={isMobile ? "top" : "bottom"}
+                                menuShouldBlockScroll={true}
+                                styles={selectStyles}
+                                isSearchable={false}
+                            />
+                        ))) : ""}
+                    {isMobile ?
+                        (<input
                             value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
                             className={styles.input}
                             type="text"
@@ -134,12 +161,6 @@ const FiltreMenu = ({
                             // format="DD/MM/YYYY"
                             format="YYYY-MM-DD"
                             calendarPosition="bottom-center"
-                            // value={[
-                            //     beginDate ? new DateObject({ date: beginDate, format: "YYYY-MM-DD" }) : null,
-                            //     endDate ? new DateObject({ date: endDate, format: "YYYY-MM-DD" }) : null
-                            // ]}
-                            // value={new DateObject([beginDate, endDate])}
-                            // value={[new DateObject(beginDate,), new DateObject(endDate)]}
                             value={range}
                             onChange={handleDateChange}
                         />
@@ -171,6 +192,8 @@ const FiltreMenu = ({
                     <button className={"btn-text secondary filled"} type="submit">
                         Применить
                     </button>
+                        />) : ""}
+                    <button className={"btn-text secondary filled"} type="submit">Применить</button>
                 </div>
             </div>
         </div>
