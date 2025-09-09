@@ -29,6 +29,18 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
     ]);
 
     useEffect(() => {
+        setBeginDate(currentQueryParams.begin || "");
+        setEndDate(currentQueryParams.end || "");
+    }, [currentQueryParams.begin, currentQueryParams.end]);
+
+    useEffect(() => {
+        setRange([
+            beginDate ? new DateObject({ date: beginDate, format: "YYYY-MM-DD" }) : null,
+            endDate ? new DateObject({ date: endDate, format: "YYYY-MM-DD" }) : null,
+        ]);
+    }, [beginDate, endDate]);
+
+    useEffect(() => {
         const checkScreen = () => setIsMobile(window.innerWidth < 768);
         checkScreen();
         window.addEventListener("resize", checkScreen);
