@@ -12,23 +12,21 @@ const months = [
 ];
 
 const FILTER_LINKS = [
-    ["nodes", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
+    ["nodesids", "Узлы", "https://api.guap.ru/news/v2/get-active-nodes"],
     ["categoriesids", "Рубрики", "https://api.guap.ru/news/v2/get-reg-categories"],
     ["tagsids", "Тэги", "https://api.guap.ru/news/v2/get-active-tags"],
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
 ];
 
-const FiltreMenu = ({
-    isFilterListVisiable,
-    currentQueryParams,
-    setCurrentQueryParams,
-    handleOnChangeInput,
-    setIsFilterListVisiable
-}) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable, resetQueryParams }) => {
     const [selectsContent, setSelectsContent] = useState({});
     const [beginDate, setBeginDate] = useState(currentQueryParams.begin || "");
     const [endDate, setEndDate] = useState(currentQueryParams.end || "");
     const [isMobile, setIsMobile] = useState(false);
+    const [range, setRange] = useState([
+        beginDate[0] ? new DateObject({ date: beginDate[0], format: "YYYY-MM-DD" }) : null,
+        endDate[0] ? new DateObject({ date: endDate[0], format: "YYYY-MM-DD" }) : null,
+    ]);
 
     useEffect(() => {
         const checkScreen = () => setIsMobile(window.innerWidth < 768);
@@ -56,10 +54,16 @@ const FiltreMenu = ({
         );
     }, []);
 
-    const defaultValues = (key, options) =>
-        options.filter((elem) =>
-            currentQueryParams[key]?.includes(elem.value)
-        );
+    const defaultValues = (key, options) => {
+        const defaultOptions = options.filter((elem) => {
+            if (currentQueryParams[key]) {
+                if (currentQueryParams[key].includes(elem.value)) {
+                    return elem;
+                }
+            }
+        });
+        return defaultOptions;
+    };
 
     const handlerOnChange = (key, data) => {
         const values = data.map((elem) => elem.value);
@@ -67,11 +71,6 @@ const FiltreMenu = ({
         if (values.length === 0) delete newCurrentQueryParams[key];
         setCurrentQueryParams(newCurrentQueryParams);
     };
-
-    const [range, setRange] = useState([
-        beginDate[0] ? new DateObject({ date: beginDate[0], format: "YYYY-MM-DD" }) : null,
-        endDate[0] ? new DateObject({ date: endDate[0], format: "YYYY-MM-DD" }) : null,
-    ]);
 
     const handleDateChange = (values) => {
         const [start, end] = values;
@@ -89,13 +88,13 @@ const FiltreMenu = ({
     };
 
     const handleDateClean = () => {
-        setRange([null, null]); // очищаем выбранный диапазон в DatePicker
+        setRange([null, null]);
 
         const newParams = { ...currentQueryParams };
         delete newParams.begin;
         delete newParams.end;
 
-        setCurrentQueryParams(newParams); // обновляем состояние родителя
+        setCurrentQueryParams(newParams);
     };
 
     return (
@@ -104,23 +103,30 @@ const FiltreMenu = ({
                 className={`${isFilterListVisiable ? styles.filterBackground : ""}`}
                 onClick={() => setIsFilterListVisiable(false)}
             ></div>
-            <div
-                className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}
-            >
-                <h6>Добавить фильтры</h6>
+            <div className={`${styles.filterList} ${isFilterListVisiable ? styles.visiable : ""}`}>
+                <div className={`${styles.filterMenuTitleWrapper} ${isMobile ? styles.filterMenuTitleWrapperMobile : ""}`}>
+                    <h6 className={styles.filterMenuTitleText}>{isMobile ? "Фильры и поиск" : "Добавить фильтры"}</h6>
+                    {Object.entries(currentQueryParams).length > 1 ? (
+                        <button className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
+                    ) : ""}
+                </div>
                 <div className={styles.selectsWrapper}>
-                    {isMobile && (
-                        <input
-                            value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
-                            className={styles.input}
-                            type="text"
-                            name="find"
-                            placeholder="Текст для поиска"
-                            onChange={handleOnChangeInput}
-                        />
+                    {selectsContent.length !== 0 && (
+                        Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
+                            <Select
+                                key={key}
+                                options={options}
+                                isMulti
+                                value={defaultValues(key, options)}
+                                onChange={(data) => handlerOnChange(key, data)}
+                                placeholder={placeholder}
+                                menuPlacement={isMobile ? "top" : "bottom"}
+                                menuShouldBlockScroll={true}
+                                styles={selectStyles}
+                                isSearchable={false}
+                            />
+                        ))
                     )}
-
-                    {/* DatePicker */}
                     <div className={styles.datePickerWrapper}>
                         <DatePicker
                             inputClass={styles.datePickerInput}
@@ -131,15 +137,8 @@ const FiltreMenu = ({
                             dateSeparator=" — "
                             arrowStyle={{ display: "none" }}
                             placeholder="Дата"
-                            // format="DD/MM/YYYY"
                             format="YYYY-MM-DD"
                             calendarPosition="bottom-center"
-                            // value={[
-                            //     beginDate ? new DateObject({ date: beginDate, format: "YYYY-MM-DD" }) : null,
-                            //     endDate ? new DateObject({ date: endDate, format: "YYYY-MM-DD" }) : null
-                            // ]}
-                            // value={new DateObject([beginDate, endDate])}
-                            // value={[new DateObject(beginDate,), new DateObject(endDate)]}
                             value={range}
                             onChange={handleDateChange}
                         />
@@ -153,24 +152,15 @@ const FiltreMenu = ({
                             </svg>
                         </button>
                     </div>
-
-                    {/* Select фильтры */}
-                    {Object.entries(selectsContent).map(([key, { options, placeholder }]) => (
-                        <Select
-                            key={key}
-                            options={options}
-                            isMulti
-                            defaultValue={defaultValues(key, options)}
-                            onChange={(data) => handlerOnChange(key, data)}
-                            placeholder={placeholder}
-                            menuPlacement={isMobile ? "top" : "bottom"}
-                            styles={selectStyles}
-                        />
-                    ))}
-
-                    <button className={"btn-text secondary filled"} type="submit">
-                        Применить
-                    </button>
+                    {isMobile && (<input
+                        value={currentQueryParams.find ? decodeURIComponent(currentQueryParams.find) : ""}
+                        className={styles.input}
+                        type="text"
+                        name="find"
+                        placeholder="Текст для поиска"
+                        onChange={handleOnChangeInput}
+                    />)}
+                    <button className={"btn-text secondary filled"} type="submit">Применить</button>
                 </div>
             </div>
         </div>
