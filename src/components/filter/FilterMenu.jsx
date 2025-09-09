@@ -120,7 +120,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                 <div className={`${styles.filterMenuTitleWrapper} ${isMobile ? styles.filterMenuTitleWrapperMobile : ""}`}>
                     <h6 className={styles.filterMenuTitleText}>{isMobile ? "Фильры и поиск" : "Добавить фильтры"}</h6>
                     {Object.entries(currentQueryParams).length > 1 ? (
-                        <button className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
+                        <button type='button' className="btn-text secondary" onClick={resetQueryParams}>Сбросить</button>
                     ) : ""}
                 </div>
                 <div className={styles.selectsWrapper}>

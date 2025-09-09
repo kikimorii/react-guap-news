@@ -6,6 +6,9 @@ export default () => {
         if (queryTitle === 'page') {
             queryParams[queryTitle] = queryValues.split(',')[0] || 1;
         }
+        if (queryTitle === 'begin' || queryTitle === 'end') {
+            queryParams[queryTitle] = queryValues.split(',')[0] || null;
+        }
         else queryParams[queryTitle] = queryValues.split(',');
     });
     if (!queryParams.page) {
