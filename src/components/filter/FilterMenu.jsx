@@ -25,8 +25,8 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
     const [endDate, setEndDate] = useState(currentQueryParams.end || "");
     const [isMobile, setIsMobile] = useState(false);
     const [range, setRange] = useState([
-        beginDate[0] ? new DateObject({ date: beginDate[0], format: "YYYY-MM-DD" }) : null,
-        endDate[0] ? new DateObject({ date: endDate[0], format: "YYYY-MM-DD" }) : null,
+        beginDate ? new DateObject({ date: beginDate, format: "YYYY-MM-DD" }) : null,
+        endDate ? new DateObject({ date: endDate, format: "YYYY-MM-DD" }) : null,
     ]);
 
     useEffect(() => {
@@ -139,7 +139,7 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                             dateSeparator=" — "
                             arrowStyle={{ display: "none" }}
                             placeholder="Дата"
-                            format="YYYY-MM-DD"
+                            format="DD.MM.YYYY"
                             calendarPosition="bottom-center"
                             value={range}
                             onChange={handleDateChange}
