@@ -5,7 +5,7 @@ import FilterMenu from './filter/FilterMenu';
 import FilterSearch from './filter/FilterSearch';
 import FilterChips from './filter/FilterChips';
 
-const SearchForm = ({ queryParams, setQueryParams }) => {
+const SearchForm = ({ queryParams, setQueryParams, minDateCalendare }) => {
     const [currentQueryParams, setCurrentQueryParams] = useState(queryParams);
     const [filterCount, setFilterCount] = useState(null);
     const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
@@ -41,7 +41,6 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
 
     return (
         <form className={styles.form} onSubmit={handleOnSubmit} id="searchForm">
-
             <FilterTitle
                 filterCount={filterCount}
                 setIsFilterListVisiable={setIsFilterListVisiable}
@@ -54,6 +53,7 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
                 handleOnChangeInput={handleOnChange}
                 setIsFilterListVisiable={setIsFilterListVisiable}
                 resetQueryParams={resetQueryParams}
+                minDateCalendar={minDateCalendare}
             />
             <FilterSearch
                 currentQueryParams={currentQueryParams}

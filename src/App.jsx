@@ -11,6 +11,10 @@ const App = () => {
   const queryString = useMemo(() => getQueryString(queryParams), [queryParams]);
   const url = `https://api.guap.ru/news/v2/get-list-pubs?${queryString}&itemsOnPage=11`;
   const [isLoading, setIsLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
+  const lastPageQueryString = getQueryString({ page: totalPages });
+  const lastPageURL = `https://api.guap.ru/news/v2/get-list-pubs?${lastPageQueryString}&itemsOnPage=11`;
+  const [minDateCalendare, setMinDateCalendar] = useState(null);
 
   useEffect(() => {
     const qs = getQueryString(queryParams);
@@ -26,12 +30,22 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    loadingPageContent(url, setPageItems, setPagePagination, setIsLoading);
+    loadingPageContent(url, setPageItems, setPagePagination, setIsLoading, setTotalPages, lastPageQueryString);
   }, [url]);
+
+  useEffect(() => {
+    fetch(lastPageURL)
+      .then((r) => r.json()).then((lastPageData) => {
+        setMinDateCalendar(new Date(lastPageData.items[lastPageData.items.length - 1].date || null));
+        console.log(new Date(lastPageData?.items[lastPageData.items.length - 1]?.date || ""));
+      });
+  }, [lastPageURL])
+
+
 
   return (
     <>
-      <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} />
+      <SearchForm queryParams={queryParams} setQueryParams={setQueryParams} minDateCalendare={minDateCalendare} />
       <NewsList
         newsList={pageItems}
         isLoading={isLoading}
