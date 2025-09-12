@@ -26,11 +26,15 @@ const SearchForm = ({ queryParams, setQueryParams, minDateCalendare }) => {
     };
 
     const deleteQueryParam = (key) => {
-        const [tagName, id] = key.split("-");
         const newParam = {...currentQueryParams};
-        const index = newParam[tagName].indexOf(id);
-        newParam[tagName].splice(index, 1);
-        if (newParam[tagName].length === 0) delete newParam[tagName];
+        if (key === 'end' || key === 'begin') {
+            delete newParam[key];
+        } else {
+            const [tagName, id] = key.split("-");
+            const index = newParam[tagName].indexOf(id);
+            newParam[tagName].splice(index, 1);
+            if (newParam[tagName].length === 0) delete newParam[tagName];
+        }
         setCurrentQueryParams(newParam);
         setQueryParams(newParam);
     }

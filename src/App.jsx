@@ -37,7 +37,7 @@ const App = () => {
     fetch(lastPageURL)
       .then((r) => r.json()).then((lastPageData) => {
         setMinDateCalendar(new Date(lastPageData.items[lastPageData.items.length - 1].date || null));
-        console.log(new Date(lastPageData?.items[lastPageData.items.length - 1]?.date || ""));
+        // console.log(new Date(lastPageData?.items[lastPageData.items.length - 1]?.date || ""));
       });
   }, [lastPageURL])
 
