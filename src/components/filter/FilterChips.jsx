@@ -31,21 +31,28 @@ const FilterChips = ({ currentQueryParams, resetQueryParams, deleteQueryParam })
     const filterParams = { ...currentQueryParams };
     delete filterParams.page;
     delete filterParams.find;
-    delete filterParams.begin;
-    delete filterParams.end;
+    // delete filterParams.begin;
+    // delete filterParams.end;
 
     const chipsContent = [];
 
     Object.entries(filterParams).forEach(([title, ids]) => {
-        ids.forEach((id) => {
-            const option = selectsContent[title]?.find((elem) => elem.value == id);
-            if (option) {
-                chipsContent.push({
-                    id: `${title}-${id}`,
-                    title: option.label,
-                });
-            }
-        });
+        if (title !== 'end' && title !== 'begin') {
+            ids.forEach((id) => {
+                const option = selectsContent[title]?.find((elem) => elem.value == id);
+                if (option) {
+                    chipsContent.push({
+                        id: `${title}-${id}`,
+                        title: option.label,
+                    });
+                }
+            });
+        } else {
+            chipsContent.push({
+                id: title,
+                title: ids
+            });
+        }
     });
 
     return (

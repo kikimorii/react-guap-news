@@ -5,7 +5,7 @@ import FilterMenu from './filter/FilterMenu';
 import FilterSearch from './filter/FilterSearch';
 import FilterChips from './filter/FilterChips';
 
-const SearchForm = ({ queryParams, setQueryParams }) => {
+const SearchForm = ({ queryParams, setQueryParams, minDateCalendare }) => {
     const [currentQueryParams, setCurrentQueryParams] = useState(queryParams);
     const [filterCount, setFilterCount] = useState(null);
     const [isFilterListVisiable, setIsFilterListVisiable] = useState(false);
@@ -26,11 +26,15 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
     };
 
     const deleteQueryParam = (key) => {
-        const [tagName, id] = key.split("-");
         const newParam = {...currentQueryParams};
-        const index = newParam[tagName].indexOf(id);
-        newParam[tagName].splice(index, 1);
-        if (newParam[tagName].length === 0) delete newParam[tagName];
+        if (key === 'end' || key === 'begin') {
+            delete newParam[key];
+        } else {
+            const [tagName, id] = key.split("-");
+            const index = newParam[tagName].indexOf(id);
+            newParam[tagName].splice(index, 1);
+            if (newParam[tagName].length === 0) delete newParam[tagName];
+        }
         setCurrentQueryParams(newParam);
         setQueryParams(newParam);
     }
@@ -41,7 +45,6 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
 
     return (
         <form className={styles.form} onSubmit={handleOnSubmit} id="searchForm">
-
             <FilterTitle
                 filterCount={filterCount}
                 setIsFilterListVisiable={setIsFilterListVisiable}
@@ -54,6 +57,7 @@ const SearchForm = ({ queryParams, setQueryParams }) => {
                 handleOnChangeInput={handleOnChange}
                 setIsFilterListVisiable={setIsFilterListVisiable}
                 resetQueryParams={resetQueryParams}
+                minDateCalendar={minDateCalendare}
             />
             <FilterSearch
                 currentQueryParams={currentQueryParams}

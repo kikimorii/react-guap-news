@@ -19,7 +19,7 @@ const FILTER_LINKS = [
     ["targetsids", "Участники", "https://api.guap.ru/news/v2/get-reg-targets"],
 ];
 
-const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable, resetQueryParams }) => {
+const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryParams, handleOnChangeInput, setIsFilterListVisiable, resetQueryParams, minDateCalendar }) => {
     const [selectsContent, setSelectsContent] = useState({});
     const [beginDate, setBeginDate] = useState(currentQueryParams.begin || "");
     const [endDate, setEndDate] = useState(currentQueryParams.end || "");
@@ -143,6 +143,8 @@ const FiltreMenu = ({ isFilterListVisiable, currentQueryParams, setCurrentQueryP
                             calendarPosition="bottom-center"
                             value={range}
                             onChange={handleDateChange}
+                            maxDate={new DateObject(Date.now())}
+                            minDate={new DateObject(minDateCalendar)}
                         />
                         {
                             beginDate && (
