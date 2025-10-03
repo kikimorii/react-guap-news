@@ -10,6 +10,14 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, './index.html'),
+        news: resolve(__dirname, './src/main.jsx'),
+      }
+    }
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -17,5 +25,4 @@ export default defineConfig({
       }
     }
   },
-  base: "/react-guap-news",
 })

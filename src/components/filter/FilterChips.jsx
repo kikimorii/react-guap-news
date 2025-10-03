@@ -69,7 +69,7 @@ const FilterChips = ({ currentQueryParams, resetQueryParams, deleteQueryParam })
                     onClick={() => deleteQueryParam(chips.id)}
                 >
                     {chips.title}
-                    <img src="/react-guap-news/close.svg" alt="" />
+                    <img src="/close.svg" alt="" />
                 </button>
             ))}
         </div>
